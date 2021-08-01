@@ -25,11 +25,14 @@ add_message_files(FILES
   Collisions.msg
   Vector2.msg
   Model.msg
+  DangerZone.msg
 )
 
 add_service_files(FILES
   SpawnModel.srv
+  SpawnModels.srv
   DeleteModel.srv
+  DeleteModels.srv
   MoveModel.srv
   StepWorld.srv
 )
