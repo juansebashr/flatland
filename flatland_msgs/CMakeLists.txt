@@ -26,6 +26,8 @@ add_message_files(FILES
   Vector2.msg
   Model.msg
   DangerZone.msg
+  StepWorld.msg
+  MoveModelMsg.msg
 )
 
 add_service_files(FILES
@@ -34,7 +36,6 @@ add_service_files(FILES
   DeleteModel.srv
   DeleteModels.srv
   MoveModel.srv
-  StepWorld.srv
 )
 
 generate_messages(

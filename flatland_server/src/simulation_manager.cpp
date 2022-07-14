@@ -116,15 +116,16 @@ void SimulationManager::Main() {
   ROS_INFO_NAMED("SimMan", "Simulation loop started");
 
   // advertise: step world service server
-  if (train_mode_) {
-    ros::NodeHandle nh;
-    step_world_service_ = nh.advertiseService(
-        "step_world", &SimulationManager::callback_StepWorld, this);
-  }
+  // if (train_mode_) {
+  //   ros::NodeHandle nh;
+  //   step_world_service_ = nh.advertiseService(
+  //       "step_world", &SimulationManager::callback_StepWorld, this);
+  // }
 
   // loading layers whenever /map is published, but callback only running when train mode on AND random map used as map_file
   ros::NodeHandle n;
   ros::Subscriber goal_sub = n.subscribe("/map", 1, &SimulationManager::callback, this);
+  ros::Subscriber step_world = n.subscribe("step_world", 1, &SimulationManager::callback_StepWorld, this);
 
   while (ros::ok() && run_simulator_) {
 
@@ -189,44 +190,19 @@ void SimulationManager::Shutdown() {
   run_simulator_ = false;
 }
 
-bool SimulationManager::callback_StepWorld(
-    flatland_msgs::StepWorld::Request &request,
-    flatland_msgs::StepWorld::Response &response) {
-  try {
-    // ros::WallRate rate_set(update_rate_);
-    // double required_duration=request.step_time.data;
-    // int num_of_steps;
-    // num_of_steps=(int)(required_duration/step_size_);
-    // for(int i=0;i<num_of_steps;i++){
-    //   world_->Update(timekeeper);  // Step physics by ros cycle time
-    //   ros::spinOnce();
-    //   rate_set.sleep();
-    // }
-    int required_steps;
-    float t = request.required_time;
-    if(request == flatland_msgs::StepWorldRequest{})
-    {
-      required_steps = 1;
-    }else 
-    {
-      required_steps = ceil(t/step_size_);
-    };
-    for (int i = 0; i < required_steps; i++)
-    {
-      world_->Update(timekeeper);  // Step physics by ros cycle time
-    };
-    last_update_time_ = ros::WallTime::now().toSec();
-    response.success = true;
-    std::string current_time = std::to_string(timekeeper.GetSimTime().toSec());
-    response.message = "current sim time(s):  " + current_time;
-    // ros::Time current_time=timekeeper.GetSimTime();
-
-  } catch (const std::exception &e) {
-    response.success = false;
-    response.message = std::string(e.what());
-    ROS_ERROR_NAMED("Service", "Failed to step world! Exception: %s", e.what());
+void SimulationManager::callback_StepWorld(
+    flatland_msgs::StepWorld msg) {
+  int required_steps;
+  float t = msg.required_time;
+  if(t == 0.0) {
+    required_steps = 1;
+  } else {
+    required_steps = ceil(t/step_size_);
   }
-  return true;
+  
+  for (int i = 0; i < required_steps; i++) {
+    world_->Update(timekeeper);  // Step physics by ros cycle time
+  }
 }
 
 void SimulationManager::callback(nav_msgs::OccupancyGrid msg) {

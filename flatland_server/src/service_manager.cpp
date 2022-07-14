@@ -70,6 +70,8 @@ ServiceManager::ServiceManager(SimulationManager *sim_man, World *world)
   toggle_pause_service_ =
       nh.advertiseService("toggle_pause", &ServiceManager::TogglePause, this);
 
+  move_model_sub = nh.subscribe("move_model", 1, &ServiceManager::MoveModelMsg, this);
+
   if (spawn_model_service_) {
     ROS_INFO_NAMED("Service Manager", "Model spawning service ready to go");
   } else {
@@ -193,6 +195,16 @@ bool ServiceManager::MoveModel(flatland_msgs::MoveModel::Request &request,
   }
 
   return true;
+}
+
+void ServiceManager::MoveModelMsg(flatland_msgs::MoveModelMsg msg) {
+  Pose pose(msg.pose.x, msg.pose.y, msg.pose.theta);
+
+  try {
+    world_->MoveModel(msg.name, pose);
+  } catch (const std::exception &e) {
+    return;
+  }
 }
 
 bool ServiceManager::Pause(std_srvs::Empty::Request &request,

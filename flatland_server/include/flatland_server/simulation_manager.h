@@ -51,7 +51,7 @@
 #include <flatland_server/debug_visualization.h>
 #include <flatland_server/timekeeper.h>
 #include <flatland_server/world.h>
-#include<flatland_msgs/StepWorld.h>
+#include <flatland_msgs/StepWorld.h>
 #include <string>
 #include <nav_msgs/OccupancyGrid.h>
 #include <std_msgs/String.h>
@@ -74,7 +74,6 @@ class SimulationManager {
 
   // add step_world_service in simulationManager
   Timekeeper timekeeper;
-  ros::ServiceServer step_world_service_;
   double last_update_time_;
 
   /**
@@ -108,8 +107,7 @@ class SimulationManager {
    * update the world by a step,
    */
 
-  bool callback_StepWorld(flatland_msgs::StepWorld::Request &request,
-                          flatland_msgs::StepWorld::Response &response);
+  void callback_StepWorld(flatland_msgs::StepWorld msg);
 
   void callback(nav_msgs::OccupancyGrid msg);
 
