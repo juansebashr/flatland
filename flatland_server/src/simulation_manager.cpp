@@ -54,6 +54,7 @@
 #include <ros/ros.h>
 #include <nav_msgs/OccupancyGrid.h>
 #include <std_msgs/String.h>
+#include <std_srvs/Empty.h>
 
 #include <exception>
 #include <limits>
@@ -126,6 +127,8 @@ void SimulationManager::Main() {
   ros::NodeHandle n;
   ros::Subscriber goal_sub = n.subscribe("/map", 1, &SimulationManager::callback, this);
   ros::Subscriber step_world = n.subscribe("step_world", 1, &SimulationManager::callback_StepWorld, this);
+
+  step_world_srv = n.advertiseService("/step_world", &SimulationManager::StepWorld, this);
 
   while (ros::ok() && run_simulator_) {
 
@@ -203,6 +206,14 @@ void SimulationManager::callback_StepWorld(
   for (int i = 0; i < required_steps; i++) {
     world_->Update(timekeeper);  // Step physics by ros cycle time
   }
+}
+
+bool SimulationManager::StepWorld(
+  std_srvs::Empty::Request &request,
+  std_srvs::Empty::Response &response 
+) {
+  world_->Update(timekeeper);  // Step physics by ros cycle time
+  return true;
 }
 
 void SimulationManager::callback(nav_msgs::OccupancyGrid msg) {

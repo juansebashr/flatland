@@ -55,6 +55,7 @@
 #include <string>
 #include <nav_msgs/OccupancyGrid.h>
 #include <std_msgs/String.h>
+#include <std_srvs/Empty.h>
 
 namespace flatland_server {
 
@@ -75,6 +76,8 @@ class SimulationManager {
   // add step_world_service in simulationManager
   Timekeeper timekeeper;
   double last_update_time_;
+
+  ros::ServiceServer step_world_srv;
 
   /**
    * @name  Simulation Manager constructor
@@ -108,6 +111,11 @@ class SimulationManager {
    */
 
   void callback_StepWorld(flatland_msgs::StepWorld msg);
+
+  bool StepWorld(
+    std_srvs::Empty::Request &request,
+    std_srvs::Empty::Response &response 
+  );
 
   void callback(nav_msgs::OccupancyGrid msg);
 
