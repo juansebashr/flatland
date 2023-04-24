@@ -72,6 +72,8 @@ ServiceManager::ServiceManager(SimulationManager *sim_man, World *world)
   
   spawn_model_from_string_service =
       nh.advertiseService("spawn_model_from_string", &ServiceManager::SpawnModelFromString, this);
+  spawn_models_from_string_service =
+      nh.advertiseService("spawn_models_from_string", &ServiceManager::SpawnModelsFromString, this);
 
   move_model_sub = nh.subscribe("move_model", 1, &ServiceManager::MoveModelMsg, this);
 
@@ -170,6 +172,33 @@ bool ServiceManager::SpawnModels(flatland_msgs::SpawnModels::Request &request,
                       e.what());
     }
   }
+  ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
+  return true;
+}
+
+bool ServiceManager::SpawnModelsFromString(
+    flatland_msgs::SpawnModels::Request &request,
+    flatland_msgs::SpawnModels::Response &response) {
+  ros::WallTime start = ros::WallTime::now();
+  ROS_DEBUG_NAMED("ServiceManager",
+                  "Request to spawn %ld models", request.models.size());
+
+  response.success = true;
+  response.message = "";
+  for(int i_model=0; i_model < request.models.size(); i_model++){
+    flatland_msgs::Model model = request.models[i_model];
+    Pose pose(model.pose.x, model.pose.y, model.pose.theta);
+
+    try {
+      world_->LoadModel(model.yaml_path, model.ns, model.name, pose, 1);
+    } catch (const std::exception &e) {
+      response.success = false;
+      response.message = std::string(e.what());
+      ROS_ERROR_NAMED("ServiceManager", "Failed to load model! Exception: %s",
+                      e.what());
+    }
+  }
+
   ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
   return true;
 }

@@ -206,6 +206,8 @@ void SimulationManager::callback_StepWorld(
   for (int i = 0; i < required_steps; i++) {
     world_->Update(timekeeper);  // Step physics by ros cycle time
   }
+
+  last_update_time_ = ros::WallTime::now().toSec();
 }
 
 bool SimulationManager::StepWorld(
@@ -213,6 +215,9 @@ bool SimulationManager::StepWorld(
   std_srvs::Empty::Response &response 
 ) {
   world_->Update(timekeeper);  // Step physics by ros cycle time
+
+  last_update_time_ = ros::WallTime::now().toSec();
+
   return true;
 }
 
