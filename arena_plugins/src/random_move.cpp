@@ -7,7 +7,6 @@
 
 namespace flatland_plugins {
 using namespace std;
-
 void RandomMove::OnInitialize(const YAML::Node& config) {
   YamlReader reader(config);
   string body_name = reader.Get<string>("body");
@@ -20,15 +19,19 @@ void RandomMove::OnInitialize(const YAML::Node& config) {
   // Make sure there are not unusued keys
   reader.EnsureAccessedAllKeys();
 }
-
 void RandomMove::BeforePhysicsStep(const Timekeeper& timekeeper) {
+  auto v_linear = body_->physics_body_->GetLinearVelocity();
+  float v_angular = 0.f;
   auto angle = body_->physics_body_->GetAngle();
-
-  float v_angular = randomRange(-angular_velocity_max_, angular_velocity_max_);
-  float v_x = linear_velocity_ * cos(angle);
-  float v_y = linear_velocity_ * sin(angle);
-
-  body_->physics_body_->SetLinearVelocity(b2Vec2(v_x, v_y));
+  float sign = 1.0f;
+  // the body collide with other objects, then inverse the linear velocity
+  if (v_linear.Length() < 0.3*linear_velocity_) {
+    sign = -1;
+    v_angular = randomRange(-angular_velocity_max_, angular_velocity_max_);
+    float v_x = sign * linear_velocity_ * cos(angle);
+    float v_y = sign * linear_velocity_ * sin(angle);
+    body_->physics_body_->SetLinearVelocity(b2Vec2(v_x, v_y));
+  }
   body_->physics_body_->SetAngularVelocity(v_angular);
 }
 

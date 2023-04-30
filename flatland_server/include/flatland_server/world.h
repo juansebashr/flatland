@@ -156,8 +156,6 @@ class World : public b2ContactListener {
    */
   void LoadModel(const std::string &model_yaml_path, const std::string &ns,
                  const std::string &name, const Pose &pose);
-  void LoadModel(const std::string &model_yaml_path, const std::string &ns,
-                const std::string &name, const Pose &pose, int source);
 
   /**
    * @brief remove model with a given name

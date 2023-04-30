@@ -47,7 +47,6 @@
 #include <flatland_msgs/DeleteModel.h>
 #include <flatland_msgs/DeleteModels.h>
 #include <flatland_msgs/MoveModel.h>
-#include <flatland_msgs/MoveModelMsg.h>
 #include <flatland_msgs/SpawnModel.h>
 #include <flatland_msgs/SpawnModels.h>
 #include <flatland_server/simulation_manager.h>
@@ -80,9 +79,6 @@ class ServiceManager {
   ros::ServiceServer resume_service_;  ///< service for resuming the simulation
   ros::ServiceServer toggle_pause_service_;  ///< service for toggling the
                                              /// pause state of the simulation
-  ros::ServiceServer spawn_model_from_string_service;   ///< service for spawning models
-
-  ros::Subscriber move_model_sub;
 
   /**
    * @brief Service manager constructor
@@ -99,8 +95,6 @@ class ServiceManager {
   bool SpawnModel(flatland_msgs::SpawnModel::Request &request,
                   flatland_msgs::SpawnModel::Response &response);
 
-  bool SpawnModelFromString(flatland_msgs::SpawnModel::Request &request,
-                  flatland_msgs::SpawnModel::Response &response);
 
 
   /**
@@ -139,7 +133,6 @@ class ServiceManager {
   bool MoveModel(flatland_msgs::MoveModel::Request &request,
                  flatland_msgs::MoveModel::Response &response);
 
-  void MoveModelMsg(flatland_msgs::MoveModelMsg msg);
   /**
    * @brief Callback for the pause service
    */

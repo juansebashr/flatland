@@ -59,16 +59,9 @@ YamlReader::YamlReader(const YAML::Node &node) : node_(node) {
   SetErrorInfo("_NONE_", "_NONE_");
 }
 
-YamlReader::YamlReader(const std::string &path): YamlReader(path, 0) {}
-
-YamlReader::YamlReader(const std::string &path, int source) {
+YamlReader::YamlReader(const std::string &path) {
   try {
-    if (source == 0) {
-      node_ = YAML::LoadFile(path);
-    } else if (source == 1) {
-      node_ = YAML::Load(path);
-    }
-
+    node_ = YAML::LoadFile(path);
     YamlPreprocessor::Parse(node_);
   } catch (const YAML::BadFile &e) {
     throw YAMLException("File does not exist, path=" + Q(path));

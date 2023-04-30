@@ -69,11 +69,6 @@ ServiceManager::ServiceManager(SimulationManager *sim_man, World *world)
       nh.advertiseService("resume", &ServiceManager::Resume, this);
   toggle_pause_service_ =
       nh.advertiseService("toggle_pause", &ServiceManager::TogglePause, this);
-  
-  spawn_model_from_string_service =
-      nh.advertiseService("spawn_model_from_string", &ServiceManager::SpawnModelFromString, this);
-
-  move_model_sub = nh.subscribe("move_model", 1, &ServiceManager::MoveModelMsg, this);
 
   if (spawn_model_service_) {
     ROS_INFO_NAMED("Service Manager", "Model spawning service ready to go");
@@ -118,37 +113,6 @@ bool ServiceManager::SpawnModel(flatland_msgs::SpawnModel::Request &request,
 
   return true;
 }
-
-
-// FOR SPAWN MODEL WITHOUT NEW FILE
-bool ServiceManager::SpawnModelFromString(
-    flatland_msgs::SpawnModel::Request &request,
-    flatland_msgs::SpawnModel::Response &response) {
-  ros::WallTime start = ros::WallTime::now();
-  ROS_DEBUG_NAMED("ServiceManager",
-                  "Model spawn requested from file, namespace(\"%s\"), "
-                  "name(\'%s\"), pose(%f,%f,%f)", request.ns.c_str(),
-                  request.name.c_str(), request.pose.x, request.pose.y,
-                  request.pose.theta);
-
-  Pose pose(request.pose.x, request.pose.y, request.pose.theta);
-
-  try {
-    world_->LoadModel(request.yaml_path, request.ns, request.name, pose, 1);
-    response.success = true;
-    response.message = "";
-  } catch (const std::exception &e) {
-    response.success = false;
-    response.message = std::string(e.what());
-    ROS_ERROR_NAMED("ServiceManager", "Failed to load model! Exception: %s",
-                    e.what());
-  }
-
-  ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
-  return true;
-}
-///////
-
 
 bool ServiceManager::SpawnModels(flatland_msgs::SpawnModels::Request &request,
                                 flatland_msgs::SpawnModels::Response &response) {
@@ -229,16 +193,6 @@ bool ServiceManager::MoveModel(flatland_msgs::MoveModel::Request &request,
   }
 
   return true;
-}
-
-void ServiceManager::MoveModelMsg(flatland_msgs::MoveModelMsg msg) {
-  Pose pose(msg.pose.x, msg.pose.y, msg.pose.theta);
-
-  try {
-    world_->MoveModel(msg.name, pose);
-  } catch (const std::exception &e) {
-    return;
-  }
 }
 
 bool ServiceManager::Pause(std_srvs::Empty::Request &request,
