@@ -81,10 +81,12 @@ int main(int argc, char **argv) {
   // Load parameters
   std::string world_path;  // The file path to the world.yaml file
   if (!node_handle.getParam("/world_path", world_path)) {
+    ROS_INFO_STREAM_NAMED("Node", world_path);
     ROS_FATAL_NAMED("Node", "No world_path parameter given!");
     ros::shutdown();
     return 1;
   }
+  
   std::string map_layer_path;
   node_handle.getParam("/map_layer_path", map_layer_path);
 
@@ -99,6 +101,7 @@ int main(int argc, char **argv) {
 
   bool show_viz = false;
   node_handle.getParam("/show_viz", show_viz);
+  ROS_INFO_STREAM_NAMED("Node", "show_viz: " << show_viz);
 
   float viz_pub_rate = 30.0;
   node_handle.getParam("/viz_pub_rate", viz_pub_rate);
