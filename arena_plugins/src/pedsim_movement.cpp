@@ -84,7 +84,7 @@ void PedsimMovement::OnInitialize(const YAML::Node &config){
     safety_dist_body_ = GetModel()->GetBody(reader.Get<std::string>("safety_dist_body"));
     safety_dist_b2body_danger_zone = GetModel()->GetBody(reader.Get<std::string>("safety_dist_body"))->GetPhysicsBody();
     safety_dist_body_danger_zone = GetModel()->GetBody(reader.Get<std::string>("safety_dist_body"));
-      
+
     // Set leg radius
     set_circular_footprint(left_leg_body_, leg_radius_);
     set_circular_footprint(right_leg_body_, leg_radius_);
@@ -95,7 +95,7 @@ void PedsimMovement::OnInitialize(const YAML::Node &config){
         throw flatland_server::YAMLException("Body with with the given name does not exist");
     }
 
-    safety_dist_body_alpha = reader.Get<float>("safety_dist_body_alpha", 0.3);
+    safety_dist_body_alpha = reader.Get<float>("safety_dist_body_alpha", 0.45);
 
     legs_max_speed = 1.8;
 
@@ -154,6 +154,7 @@ void PedsimMovement::BeforePhysicsStep(const Timekeeper &timekeeper) {
     vel_x = person.twist.linear.x; //
     vel_y = person.twist.linear.y; // 
     vel = sqrt(vel_x*vel_x+vel_y*vel_y);
+
     //change visualization of the human if they are talking
     safety_dist_= safety_dist_config["safety distance factor"][person.social_state].as<float>() * safety_dist_config["human obstacle safety distance radius"][person.type].as<float>();
 
@@ -164,9 +165,15 @@ void PedsimMovement::BeforePhysicsStep(const Timekeeper &timekeeper) {
     else if(safety_dist_config["safety distance factor"][person.social_state].as<float>() < 0.89){  
             c=Color(  0.16, 0.93, 0.16, safety_dist_body_alpha) ;
     }
+
+    // Set a color if its distracted
+    if (person.distraction_state != "None"){
+        c = Color(0.9, 0.05, 0.05, safety_dist_body_alpha);
+    }
+
     if(useDangerZone==false){
             //change visualization of the human if they are talking         
-      
+    
             safety_dist_body_->SetColor(c);
             updateSafetyDistance();
     }else{
