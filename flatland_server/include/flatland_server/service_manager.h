@@ -79,6 +79,8 @@ class ServiceManager {
   ros::ServiceServer resume_service_;  ///< service for resuming the simulation
   ros::ServiceServer toggle_pause_service_;  ///< service for toggling the
                                              /// pause state of the simulation
+  ros::ServiceServer spawn_model_from_string_service;   ///< service for spawning models
+  ros::ServiceServer spawn_models_from_string_service;   ///< service for spawning models
 
   /**
    * @brief Service manager constructor
@@ -105,6 +107,8 @@ class ServiceManager {
    * @param[in/out] response Contains the response for the service
    */
   bool SpawnModels(flatland_msgs::SpawnModels::Request &request,
+                  flatland_msgs::SpawnModels::Response &response);
+  bool SpawnModelsFromString(flatland_msgs::SpawnModels::Request &request,
                   flatland_msgs::SpawnModels::Response &response);
 
   /**
