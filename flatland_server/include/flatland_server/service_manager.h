@@ -97,7 +97,8 @@ class ServiceManager {
   bool SpawnModel(flatland_msgs::SpawnModel::Request &request,
                   flatland_msgs::SpawnModel::Response &response);
 
-
+  bool SpawnModelFromString(flatland_msgs::SpawnModel::Request &request,
+                flatland_msgs::SpawnModel::Response &response);
 
   /**
    * @brief Callback for the spawn models service. 
