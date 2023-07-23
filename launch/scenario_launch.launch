@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <!-- Arguments -->
+    <arg name="train_mode" default="false"/>
+    <arg name="model" default="burger" doc="model type [burger, jackal, ridgeback, agvota, rto, rto_real, dingo]"/>
+    <arg name="enable_pedsim" default="true"/>
+    <arg name="use_recorder" default="false"/>
+    <arg name="record_only_planner" default="true"/>
+
+    <!-- The scenario that is going to be loaded -->
+    <arg name="scenario_file" default="arena/1_empty_4_sta4_dyn5.json"/>
+    <arg name="scenarios_json_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
+
+    <!-- Load Scenario Reader Node -->
+    <node name="scenario_reader" pkg="read_scenario" type="scenario_reader.py">
+        <param name="json_file_path" value="$(arg scenarios_json_path)" />
+    </node>
+
+    <!-- Launch Flatland-Rviz with a delay of 1 second -->
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+    <arg name="time" value="1" />
+    <arg name="file" value="/home/sebastian/distracted-navigation/robot/ros_ws/src/simulator/flatland/launch/flatland_simulator.launch"/>
+    <arg name="value" value="train_mode:=$(arg train_mode) model:=$(arg model) enable_pedsim:=$(arg enable_pedsim) use_recorder:=$(arg use_recorder) record_only_planner:=$(arg record_only_planner) scenario_file:=$(arg scenario_file)" />
+</include>
+</launch>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <!-- Read the param of the map directory -->
+  <arg name="imp" default="eval('_' + '_import_' + '_(\'rospy\')')"/>
+  <arg name="map_dir" default="$(eval eval(arg('imp')).get_param('map_dir', 'None'))" />
+  <arg name="map_path" default="$(arg map_dir)/map.yaml" />
+  <param name="world_path" value="$(arg map_dir)/map.world.yaml" />
+  <param name="map_layer_path" value="$(arg map_dir)/map_layer.yaml" />
+
+  <!-- Map parameters -->
+  <arg name="global_frame_id" value="map"/>
+  <arg name="odom_frame_id" value="odom"/>
+  <arg name="base_frame_id" value="base_footprint"/>
+  <arg name="odom_ground_truth" default="/odometry/ground_truth"/>
+
+  <arg name="show_viz" default="false"/>
+  <arg name="use_rviz" default="true"/>
+  <arg name="rviz_file" default="nav_LP"/>
+  <arg name="model" default="model"/>
+
+  <!-- map server-->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_path)">
+    <param name="frame_id" value="$(arg global_frame_id)"/>
+  </node>
+
+
+  <!-- launch flatland server -->
+  <node name="flatland_server" pkg="flatland_server" type="flatland_server" output="screen">
+  </node>
+
+  <!--  ***************** Robot Model *****************  -->
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
+
+  <!--  ************** flatland viz  ***************  -->
+  <group if="$(arg show_viz)">
+    <node name="flatland_viz" pkg="flatland_viz" type="flatland_viz" output="screen" required="false" unless="$(arg use_rviz)"/>
+  </group>
+
+  <!-- start_rviz -->
+  <group if="$(arg use_rviz)">
+    <node name="flatland_rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find arena_bringup)/rviz/$(arg rviz_file).rviz"/>
+  </group>
+</launch>
