@@ -52,9 +52,7 @@
 #include <OGRE/OgreSceneManager.h>
 #include <OGRE/OgreSceneNode.h>
 #include <OgreVector3.h>
-
 #include <ros/console.h>
-
 #include <rviz/geometry.h>
 #include <rviz/mesh_loader.h>
 #include <rviz/properties/float_property.h>
@@ -72,7 +70,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
-
 #include <boost/filesystem.hpp>
 
 namespace flatland_viz {
@@ -86,19 +83,19 @@ class LoadModelDialog : public QDialog {
    * @brief               Launch load model dialog
    * @param               parent, parent widget pointer
    * @param               tool, pointer to this so dialog can call methods
- */
+   */
   LoadModelDialog(QWidget *parent, flatland_viz::SpawnModelTool *tool);
 
  private:
   /**
    * @name                ChooseFile
    * @brief               Launch file selection dialog
- */
+   */
   QString ChooseFile();
   /**
    * @name                AddNumberAndUpdateName
    * @brief               Add numbering to name and show in the name widget
- */
+   */
   void AddNumberAndUpdateName();
 
   static QString path_to_model_file;  // full path to model file

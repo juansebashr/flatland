@@ -188,7 +188,6 @@ void TricycleDrive::OnInitialize(const YAML::Node& config) {
 
 void TricycleDrive::ComputeJoints() {
   auto get_anchor = [&](Joint* joint, bool* is_inverted = nullptr) {
-
     b2Vec2 wheel_anchor;  ///< wheel anchor point, must be (0,0)
     b2Vec2 body_anchor;   ///< body anchor point
     bool inv = false;
@@ -447,7 +446,7 @@ double TricycleDrive::Saturate(double in, double lower, double upper) {
   out = std::min(out, upper);
   return out;
 }
-}
+}  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::TricycleDrive,
                        flatland_server::ModelPlugin)

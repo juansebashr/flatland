@@ -95,6 +95,6 @@ class BoolSensor : public ModelPlugin {
    */
   void EndContact(b2Contact *contact) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

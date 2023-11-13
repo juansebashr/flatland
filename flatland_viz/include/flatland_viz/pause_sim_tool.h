@@ -41,6 +41,6 @@ class PauseSimTool : public rviz::Tool {
   ros::ServiceClient
       pause_service_;  ///< ServiceClient that calls the pause toggle service
 };
-}
+}  // namespace flatland_viz
 
 #endif  // PAUSE_SIM_TOOL_H

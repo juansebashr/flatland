@@ -50,6 +50,7 @@
 #include <flatland_server/yaml_reader.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <pluginlib/class_list_macros.h>
+
 #include <Eigen/Dense>
 #include <boost/algorithm/string/join.hpp>
 
@@ -190,7 +191,7 @@ void ModelTfPublisher::AfterPhysicsStep(const Timekeeper &timekeeper) {
     tf_broadcaster.sendTransform(tf_stamped);
   }
 }
-};
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::ModelTfPublisher,
                        flatland_server::ModelPlugin)

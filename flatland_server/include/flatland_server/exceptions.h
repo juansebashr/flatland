@@ -48,6 +48,7 @@
 #define FLATLAND_SERVER_EXCEPTIONS_H
 
 #include <yaml-cpp/yaml.h>
+
 #include <boost/filesystem.hpp>
 #include <exception>
 #include <string>
@@ -57,8 +58,8 @@ namespace flatland_server {
 class Exception : public std::runtime_error {
  public:
   /**
-  * @brief Constructor for the Exception class
-  */
+   * @brief Constructor for the Exception class
+   */
   Exception(const std::string &msg) : runtime_error(msg) {}
 };
 

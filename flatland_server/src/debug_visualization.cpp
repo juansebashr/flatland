@@ -45,11 +45,13 @@
  */
 
 #include "flatland_server/debug_visualization.h"
+
 #include <Box2D/Box2D.h>
 #include <ros/master.h>
 #include <ros/ros.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+
 #include <map>
 #include <string>
 
@@ -271,8 +273,9 @@ void DebugVisualization::VisualizeLayer(std::string name, Body* body) {
     marker.pose.position.y = body->physics_body_->GetPosition().y;
 
     tf2::Quaternion q;  // use tf2 to convert 2d yaw -> 3d quaternion
-    q.setRPY(0, 0, body->physics_body_
-                       ->GetAngle());  // from euler angles: roll, pitch, yaw
+    q.setRPY(0, 0,
+             body->physics_body_
+                 ->GetAngle());  // from euler angles: roll, pitch, yaw
     marker.pose.orientation = tf2::toMsg(q);
     marker.type = marker.TRIANGLE_LIST;
 

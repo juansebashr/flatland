@@ -109,7 +109,7 @@ class PluginManager {
    * @param[in] world, the world that thsi plugin is tied to
    * @param[in] plugin_reader, the YAML reader with node containing the plugin
    * @param[in] world_config, the yaml reader of world.yaml
-  */
+   */
   void LoadWorldPlugin(World *world, YamlReader &plugin_reader,
                        YamlReader &world_config);
 

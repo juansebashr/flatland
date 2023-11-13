@@ -45,8 +45,10 @@
  */
 
 #include "flatland_server/yaml_preprocessor.h"
+
 #include <gtest/gtest.h>
 #include <ros/ros.h>
+
 #include <cmath>
 
 namespace fs = boost::filesystem;

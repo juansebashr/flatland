@@ -53,6 +53,7 @@
 #include <flatland_server/yaml_reader.h>
 #include <ros/ros.h>
 #include <yaml-cpp/yaml.h>
+
 #include <string>
 
 namespace flatland_server {
@@ -65,21 +66,21 @@ class WorldPlugin : public FlatlandPlugin {
 
  public:
   /*
-  * @brief WorldPlugin default constructor
-  */
+   * @brief WorldPlugin default constructor
+   */
   WorldPlugin() = default;
 
   /*
-  * @brief initialize the plugin
-  * @param[in] world, the World the plugin is attached to
-  * @param[in] name, name of the plugin
-  * @param[in] type, type of the plugin
-  * @param[in] plugin_reader, the YAML node contain the plugin's config
-  * @param[in] world_config, the yaml reader of world.yaml
-  */
+   * @brief initialize the plugin
+   * @param[in] world, the World the plugin is attached to
+   * @param[in] name, name of the plugin
+   * @param[in] type, type of the plugin
+   * @param[in] plugin_reader, the YAML node contain the plugin's config
+   * @param[in] world_config, the yaml reader of world.yaml
+   */
   void Initialize(World *world, std::string name, std::string type,
                   YAML::Node &plugin_reader, YamlReader &world_config);
 };
-};
+};  // namespace flatland_server
 
 #endif  // FLATLAND_SERVER_WORLD_PLUGIN_H

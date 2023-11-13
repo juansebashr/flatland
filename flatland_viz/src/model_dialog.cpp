@@ -45,6 +45,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "flatland_viz/model_dialog.h"
+
 #include <QColorDialog>
 #include <QFileDialog>
 #include <QHBoxLayout>
@@ -52,8 +54,6 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QVBoxLayout>
-
-#include "flatland_viz/model_dialog.h"
 
 // Initialize static variables
 QColor ModelDialog::saved_color_;

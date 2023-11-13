@@ -46,7 +46,9 @@
 
 #include <ros/ros.h>
 #include <signal.h>
+
 #include <QApplication>
+
 #include "flatland_viz/flatland_window.h"
 
 FlatlandWindow* window = nullptr;

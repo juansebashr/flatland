@@ -51,6 +51,7 @@
 #include <flatland_server/world.h>
 #include <gtest/gtest.h>
 #include <sensor_msgs/LaserScan.h>
+
 #include <regex>
 
 namespace fs = boost::filesystem;

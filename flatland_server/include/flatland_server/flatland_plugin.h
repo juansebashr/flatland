@@ -51,6 +51,7 @@
 #include <flatland_server/timekeeper.h>
 #include <ros/ros.h>
 #include <yaml-cpp/yaml.h>
+
 #include <string>
 
 namespace flatland_server {
@@ -63,30 +64,30 @@ class FlatlandPlugin {
   PluginType plugin_type_;
 
   /*
-  * @brief Get PluginType
-  */
+   * @brief Get PluginType
+   */
   const PluginType Type() { return plugin_type_; }
 
   /**
-  * @brief Get plugin name
-  */
+   * @brief Get plugin name
+   */
   const std::string &GetName() const { return name_; }
 
   /**
-  * @brief Get type of plugin
-  */
+   * @brief Get type of plugin
+   */
   const std::string &GetType() const { return type_; }
 
   /**
- * @brief The method for the particular model plugin to override and provide
- * its own initialization
- * @param[in] config The plugin YAML node
- */
+   * @brief The method for the particular model plugin to override and provide
+   * its own initialization
+   * @param[in] config The plugin YAML node
+   */
   virtual void OnInitialize(const YAML::Node &config) = 0;
 
-    /**
- * @brief For reconfiguring plugin, when model was disabled.
- */
+  /**
+   * @brief For reconfiguring plugin, when model was disabled.
+   */
   virtual void reconfigure() {}
 
   /**
@@ -132,6 +133,6 @@ class FlatlandPlugin {
    */
   virtual ~FlatlandPlugin() = default;
 };
-};  // namespace
+};  // namespace flatland_server
 
 #endif  // FLATLAND_SERVER_FLATLAND_PLUGIN_H

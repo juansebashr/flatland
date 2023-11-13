@@ -45,10 +45,15 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "flatland_viz/spawn_model_tool.h"
+
 #include <OGRE/OgreEntity.h>
 #include <OGRE/OgreException.h>
 #include <OGRE/OgreMaterial.h>
 #include <OGRE/OgreSubEntity.h>
+#include <flatland_msgs/SpawnModel.h>
+#include <flatland_server/types.h>
+#include <yaml-cpp/yaml.h>
 
 #include <QFileDialog>
 #include <QHBoxLayout>
@@ -59,17 +64,9 @@
 #include <QString>
 #include <QVBoxLayout>
 #include <QWidget>
-
 #include <boost/filesystem.hpp>
 
-#include <flatland_msgs/SpawnModel.h>
-
-#include <flatland_server/types.h>
-
-#include <yaml-cpp/yaml.h>
-
 #include "flatland_viz/load_model_dialog.h"
-#include "flatland_viz/spawn_model_tool.h"
 // #include "load_model_dialog.h"
 // #include "spawn_model_tool.h"
 

@@ -51,6 +51,7 @@
 #include <flatland_server/timekeeper.h>
 #include <flatland_server/yaml_reader.h>
 #include <pluginlib/class_list_macros.h>
+
 #include <boost/algorithm/string/join.hpp>
 
 using namespace flatland_server;
@@ -279,6 +280,6 @@ void Bumper::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse) {
   state->normal = m.normal;
   state->normal *= state->normal_sign;
 }
-};
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::Bumper, flatland_server::ModelPlugin)

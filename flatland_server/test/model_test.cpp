@@ -45,9 +45,12 @@
  */
 
 #include "flatland_server/model.h"
+
 #include <gtest/gtest.h>
 #include <ros/ros.h>
+
 #include <string>
+
 #include "flatland_server/collision_filter_registry.h"
 
 // Test the NameSpaceTF method

@@ -54,8 +54,8 @@
 #include <flatland_server/model.h>
 #include <flatland_server/plugin_manager.h>
 #include <flatland_server/timekeeper.h>
+
 #include <map>
-#include <string>
 #include <string>
 #include <vector>
 
@@ -68,7 +68,7 @@ namespace flatland_server {
  */
 class World : public b2ContactListener {
  public:
-  boost::filesystem::path world_yaml_dir_;  ///<directory containing world file
+  boost::filesystem::path world_yaml_dir_;  ///< directory containing world file
   b2World *physics_world_;                  ///< Box2D physics world
   b2Vec2 gravity_;  ///< Box2D world gravity, always (0, 0)
   std::map<std::vector<std::string>, Layer *>
@@ -132,7 +132,7 @@ class World : public b2ContactListener {
    * @param[in] world_plugin_reader, readin the info about the plugin
    * @param[in] world, the world where the plugin will be applied to
    * @param[in] world config, the yaml reader of world.yaml
-  */
+   */
   void LoadWorldPlugins(YamlReader &world_plugin_reader, World *world,
                         YamlReader &world_config);
   /**

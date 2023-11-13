@@ -46,6 +46,7 @@
 
 #include <ros/ros.h>
 #include <signal.h>
+
 #include <string>
 
 #include "flatland_server/simulation_manager.h"
@@ -86,7 +87,7 @@ int main(int argc, char **argv) {
     ros::shutdown();
     return 1;
   }
-  
+
   std::string map_layer_path;
   node_handle.getParam("/map_layer_path", map_layer_path);
 
@@ -111,7 +112,8 @@ int main(int argc, char **argv) {
 
   // Create simulation manager object
   simulation_manager = new flatland_server::SimulationManager(
-      world_path, map_layer_path, map_file, update_rate, step_size, show_viz, viz_pub_rate,train_mode);
+      world_path, map_layer_path, map_file, update_rate, step_size, show_viz,
+      viz_pub_rate, train_mode);
 
   // Register sigint shutdown handler
   signal(SIGINT, SigintHandler);

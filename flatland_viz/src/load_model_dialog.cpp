@@ -45,13 +45,13 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "flatland_viz/load_model_dialog.h"
+
 #include <OGRE/OgreEntity.h>
 #include <OGRE/OgreSceneManager.h>
 #include <OGRE/OgreSceneNode.h>
 #include <OgreVector3.h>
-
 #include <ros/console.h>
-
 #include <rviz/geometry.h>
 #include <rviz/mesh_loader.h>
 #include <rviz/properties/float_property.h>
@@ -69,10 +69,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
-
 #include <boost/filesystem.hpp>
 
-#include "flatland_viz/load_model_dialog.h"
 #include "flatland_viz/spawn_model_tool.h"
 // #include "load_model_dialog.h"
 // #include "spawn_model_tool.h"

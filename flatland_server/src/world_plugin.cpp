@@ -45,10 +45,10 @@
  */
 
 #include <Box2D/Box2D.h>
-#include <ros/ros.h>
-
 #include <flatland_server/world.h>
 #include <flatland_server/world_plugin.h>
+#include <ros/ros.h>
+
 #include <string>
 
 namespace flatland_server {
@@ -62,4 +62,4 @@ void WorldPlugin::Initialize(World *world, std::string name, std::string type,
   plugin_type_ = PluginType::World;
   OnInitialize(plugin_reader);
 }
-}
+}  // namespace flatland_server

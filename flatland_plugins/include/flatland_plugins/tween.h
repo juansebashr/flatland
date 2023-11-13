@@ -44,7 +44,6 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <map>
 #include <Box2D/Box2D.h>
 #include <flatland_plugins/update_timer.h>
 #include <flatland_server/model_plugin.h>
@@ -53,6 +52,9 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/Bool.h>
+
+#include <map>
+
 #include "tweeny.h"
 
 #ifndef FLATLAND_PLUGINS_TWEEN_H
@@ -137,6 +139,6 @@ class Tween : public flatland_server::ModelPlugin {
    */
   void TriggerCallback(const std_msgs::Bool& msg);
 };
-};
+};  // namespace flatland_plugins
 
 #endif

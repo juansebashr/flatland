@@ -51,6 +51,7 @@
 #include <flatland_server/exceptions.h>
 #include <flatland_server/types.h>
 #include <yaml-cpp/yaml.h>
+
 #include <array>
 #include <boost/algorithm/string.hpp>
 #include <boost/version.hpp>
@@ -408,7 +409,7 @@ std::array<T, N> YamlReader::GetArray(const std::string &key,
 
   return GetArray<T, N>(key);
 }
-}
+}  // namespace flatland_server
 
 // encode and decode functions for yaml-cpp to convert values for commonly used
 // types in flatland server
@@ -467,6 +468,6 @@ struct convert<flatland_server::Pose> {
     return true;
   }
 };
-}
+}  // namespace YAML
 
 #endif

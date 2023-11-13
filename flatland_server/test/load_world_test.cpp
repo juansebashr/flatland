@@ -52,6 +52,7 @@
 #include <flatland_server/types.h>
 #include <flatland_server/world.h>
 #include <gtest/gtest.h>
+
 #include <boost/filesystem.hpp>
 #include <regex>
 #include <string>

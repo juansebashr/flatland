@@ -46,6 +46,7 @@
 
 #include <flatland_server/exceptions.h>
 #include <flatland_server/model_body.h>
+
 #include <boost/algorithm/string/join.hpp>
 
 namespace flatland_server {
@@ -187,4 +188,4 @@ void ModelBody::LoadPolygonFootprint(YamlReader &footprint_reader) {
   fixture_def.shape = &shape;
   physics_body_->CreateFixture(&fixture_def);
 }
-};
+};  // namespace flatland_server

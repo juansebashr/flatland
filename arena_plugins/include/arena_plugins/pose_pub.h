@@ -52,6 +52,7 @@
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
 #include <tf/transform_broadcaster.h>
+
 #include <random>
 
 #ifndef FLATLAND_PLUGINS_POSEPUB_H
@@ -98,7 +99,7 @@ class PosePub : public flatland_server::ModelPlugin {
    */
   // void TwistCallback(const geometry_msgs::Twist& msg);
 
-   /**
+  /**
    * @name          AfterPhysicsStep
    * @brief         override the BeforePhysicsStep method
    * @param[in]     config The plugin YAML node
@@ -106,6 +107,6 @@ class PosePub : public flatland_server::ModelPlugin {
 
   void AfterPhysicsStep(const Timekeeper& timekeeper) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

@@ -44,17 +44,16 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 #include <Box2D/Box2D.h>
-#include <ros/ros.h>
-
 #include <flatland_plugins/world_modifier.h>
 #include <flatland_server/layer.h>
 #include <flatland_server/types.h>
 #include <flatland_server/world.h>
 #include <flatland_server/yaml_reader.h>
+#include <ros/ros.h>
 #include <yaml-cpp/yaml.h>
-#include <boost/filesystem.hpp>
 
 #include <algorithm>
+#include <boost/filesystem.hpp>
 #include <cmath>
 #include <iostream>
 #include <map>
@@ -194,4 +193,4 @@ void WorldModifier::AddFullWall(b2EdgeShape *wall) {
     AddSideWall(*wall, new_wall);
   }
 }
-};  // namespace
+};  // namespace flatland_plugins

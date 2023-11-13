@@ -53,6 +53,7 @@
 #include <tf/transform_broadcaster.h>
 #include <thirdparty/ThreadPool.h>
 #include <visualization_msgs/Marker.h>
+
 #include <Eigen/Dense>
 #include <random>
 #include <thread>
@@ -166,6 +167,6 @@ class LaserCallback : public b2RayCastCallback {
   float ReportFixture(b2Fixture *fixture, const b2Vec2 &point,
                       const b2Vec2 &normal, float fraction) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

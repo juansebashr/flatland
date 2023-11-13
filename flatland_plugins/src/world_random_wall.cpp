@@ -52,6 +52,7 @@
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
 #include <yaml-cpp/yaml.h>
+
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -126,7 +127,7 @@ void RandomWall::OnInitialize(const YAML::Node &config) {
     throw e;
   }
 }
-};  // namespace
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::RandomWall,
                        flatland_server::WorldPlugin)

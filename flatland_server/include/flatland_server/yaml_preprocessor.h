@@ -48,11 +48,11 @@
 #define FLATLAND_SERVER_YAML_PREPROCESSOR_H
 
 #include <flatland_server/exceptions.h>
-#include <yaml-cpp/yaml.h>
-
 #include <lauxlib.h>
 #include <lua.h>
 #include <lualib.h>
+#include <yaml-cpp/yaml.h>
+
 #include <set>
 #include <string>
 #include <vector>
@@ -90,17 +90,17 @@ void ProcessNodes(YAML::Node &node);
 void ProcessScalarNode(YAML::Node &node);
 
 /**
-  * @brief Get an environment variable with an optional default value
-  * @param[in/out] lua_State The lua state/stack to read/write to/from
-  */
+ * @brief Get an environment variable with an optional default value
+ * @param[in/out] lua_State The lua state/stack to read/write to/from
+ */
 int LuaGetEnv(lua_State *L);
 
 /**
-  * @brief Get a rosparam with an optional default value
-  * @param[in/out] lua_State The lua state/stack to read/write to/from
-  */
+ * @brief Get a rosparam with an optional default value
+ * @param[in/out] lua_State The lua state/stack to read/write to/from
+ */
 int LuaGetParam(lua_State *L);
-};
-}
+};  // namespace YamlPreprocessor
+}  // namespace flatland_server
 
 #endif  // FLATLAND_SERVER_YAML_PREPROCESSOR_H

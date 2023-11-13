@@ -73,9 +73,9 @@ class ModelTfPublisher : public ModelPlugin {
   UpdateTimer update_timer_;                ///< for managing update rate
 
   /**
- * @brief Initialization for the plugin
- * @param[in] config Plugin YAML Node
- */
+   * @brief Initialization for the plugin
+   * @param[in] config Plugin YAML Node
+   */
   void OnInitialize(const YAML::Node &config) override;
 
   /**
@@ -84,6 +84,6 @@ class ModelTfPublisher : public ModelPlugin {
    */
   void AfterPhysicsStep(const Timekeeper &timekeeper) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

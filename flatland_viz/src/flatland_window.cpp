@@ -47,6 +47,9 @@
 
 #include "flatland_viz/flatland_window.h"
 
+#include <OgreMeshManager.h>
+#include <OgreRenderWindow.h>
+
 #include <QAction>
 #include <QActionGroup>
 #include <QDesktopWidget>
@@ -88,9 +91,6 @@
 #include "rviz/widget_geometry_change_detector.h"
 #include "rviz/yaml_config_reader.h"
 #include "rviz/yaml_config_writer.h"
-
-#include <OgreMeshManager.h>
-#include <OgreRenderWindow.h>
 //#include <ogre_helpers/initialization.h>
 
 void FlatlandWindow::openNewToolDialog() {

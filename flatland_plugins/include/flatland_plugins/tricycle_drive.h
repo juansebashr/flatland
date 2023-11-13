@@ -50,6 +50,7 @@
 #include <flatland_server/timekeeper.h>
 #include <geometry_msgs/Twist.h>
 #include <nav_msgs/Odometry.h>
+
 #include <random>
 
 #ifndef FLATLAND_PLUGINS_TRICYCLE_DRIVE_H
@@ -122,10 +123,10 @@ class TricycleDrive : public flatland_server::ModelPlugin {
   void BeforePhysicsStep(const Timekeeper& timekeeper) override;
 
   /**
-  * @name          TwistCallback
-  * @brief         callback to apply twist (velocity and omega)
-  * @param[in]     timestep how much the physics time will increment
-  */
+   * @name          TwistCallback
+   * @brief         callback to apply twist (velocity and omega)
+   * @param[in]     timestep how much the physics time will increment
+   */
   void TwistCallback(const geometry_msgs::Twist& msg);
 
   /**
@@ -137,6 +138,6 @@ class TricycleDrive : public flatland_server::ModelPlugin {
    */
   double Saturate(double in, double lower, double upper);
 };
-}
+}  // namespace flatland_plugins
 
 #endif

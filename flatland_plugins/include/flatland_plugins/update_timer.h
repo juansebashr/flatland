@@ -76,6 +76,6 @@ class UpdateTimer {
    */
   bool CheckUpdate(const flatland_server::Timekeeper &timekeeper);
 };
-};
+};  // namespace flatland_plugins
 
 #endif

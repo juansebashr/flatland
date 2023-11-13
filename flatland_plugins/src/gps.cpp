@@ -123,6 +123,6 @@ void Gps::ParseParameters(const YAML::Node &config) {
   gps_tf_.transform.rotation.z = sin(0.5 * origin_.theta);
   gps_tf_.transform.rotation.w = cos(0.5 * origin_.theta);
 }
-}
+}  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::Gps, flatland_server::ModelPlugin)

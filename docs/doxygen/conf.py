@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "Flatland.tex", "Flatland Documentation", "Avidbots Corp."),
+    (master_doc, "Flatland.tex", "Flatland Documentation", "Avidbots Corp.")
 ]
 
 
@@ -167,7 +167,7 @@ texinfo_documents = [
         "Flatland",
         "One line description of project.",
         "Miscellaneous",
-    ),
+    )
 ]
 
 

@@ -45,7 +45,9 @@
  */
 
 #include "flatland_server/geometry.h"
+
 #include <Box2D/Box2D.h>
+
 #include <cmath>
 
 namespace flatland_server {
@@ -85,4 +87,4 @@ b2Vec2 Geometry::InverseTransform(const b2Vec2& in, const RotateTranslate& rt) {
   out.y = -(in.x - rt.dx) * rt.sin + (in.y - rt.dy) * rt.cos;
   return out;
 }
-};
+};  // namespace flatland_server

@@ -283,6 +283,6 @@ void Tween::BeforePhysicsStep(const Timekeeper& timekeeper) {
     }
   }
 }
-}
+}  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::Tween, flatland_server::ModelPlugin)

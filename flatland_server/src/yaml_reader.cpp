@@ -46,6 +46,7 @@
 
 #include <flatland_server/yaml_preprocessor.h>
 #include <flatland_server/yaml_reader.h>
+
 #include <boost/filesystem/path.hpp>
 
 namespace flatland_server {
@@ -250,4 +251,4 @@ void YamlReader::EnsureAccessedAllKeys() {
                         fmt_in_);
   }
 }
-}
+}  // namespace flatland_server

@@ -51,6 +51,7 @@
 #include <flatland_server/yaml_reader.h>
 #include <geometry_msgs/TransformStamped.h>
 #include <pluginlib/class_list_macros.h>
+
 #include <boost/algorithm/string/join.hpp>
 #include <cmath>
 #include <limits>
@@ -277,6 +278,6 @@ void Laser::ParseParameters(const YAML::Node &config) {
                   min_angle_, max_angle_, increment_, layers_bits_,
                   boost::algorithm::join(layers, ",").c_str());
 }
-};
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::Laser, flatland_server::ModelPlugin)

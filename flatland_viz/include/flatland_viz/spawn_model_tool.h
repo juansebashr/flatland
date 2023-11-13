@@ -48,18 +48,18 @@
 #ifndef SPAWN_MODEL_TOOL_H
 #define SPAWN_MODEL_TOOL_H
 
-#include <rviz/tool.h>
-#include <memory>
-#include <vector>
-
 #include <OGRE/OgreEntity.h>
 #include <OGRE/OgreSceneManager.h>
 #include <OGRE/OgreSceneNode.h>
 #include <OgreVector3.h>
-
 #include <flatland_server/yaml_reader.h>
 #include <ros/ros.h>
 #include <rviz/ogre_helpers/billboard_line.h>
+#include <rviz/tool.h>
+
+#include <memory>
+#include <vector>
+
 #include "rviz/ogre_helpers/arrow.h"
 
 namespace flatland_viz {
@@ -92,9 +92,9 @@ class SpawnModelTool : public rviz::Tool {
    */
   void SaveName(QString n);
   /**
-  * @name                SpawnModelInFlatland
-  * @brief               Spawns a model using ros service
-  */
+   * @name                SpawnModelInFlatland
+   * @brief               Spawns a model using ros service
+   */
   void SpawnModelInFlatland();
 
  private:
@@ -121,10 +121,10 @@ class SpawnModelTool : public rviz::Tool {
    */
   virtual int processMouseEvent(rviz::ViewportMouseEvent &event);
   /**
-  * @name                SetMovingModelColor
-  * @brief               Set the color of the moving model
-  * @param c             QColor to set the 3d model
-  */
+   * @name                SetMovingModelColor
+   * @brief               Set the color of the moving model
+   * @param c             QColor to set the 3d model
+   */
   void SetMovingModelColor(QColor c);
   /**
    * @name               LoadPreview
@@ -148,10 +148,9 @@ class SpawnModelTool : public rviz::Tool {
   void LoadCircleFootprint(flatland_server::YamlReader &footprint,
                            const flatland_server::Pose pose);
 
-  Ogre::Vector3
-      intersection;     // location cursor intersects ground plane, ie the
-                        // location to create the model
-  float initial_angle;  // the angle to create the model at
+  Ogre::Vector3 intersection;  // location cursor intersects ground plane, ie
+                               // the location to create the model
+  float initial_angle;                  // the angle to create the model at
   Ogre::SceneNode *moving_model_node_;  // the node for the 3D object
   enum ModelState { m_hidden, m_dragging, m_rotating };
   ModelState model_state;  // model state, first hidden, then dragging to

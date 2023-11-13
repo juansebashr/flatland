@@ -7,7 +7,6 @@
 #include <nav_msgs/Odometry.h>
 #include <std_msgs/Bool.h>
 
-
 #ifndef ARENA_PLUGINS_RANDOM_MOVE_H
 #define ARENA_PLUGINS_RANDOM_MOVE_H
 using namespace flatland_server;
@@ -17,9 +16,9 @@ namespace flatland_plugins {
  */
 class RandomMove : public ModelPlugin {
  public:
-  Body* body_;  // The body this plugin is attached to
-  float linear_velocity_;  // The linear verlocity that the objects keeps.
-  float angular_velocity_max_; // The maxmum angular_velocity of the objects.
+  Body* body_;                  // The body this plugin is attached to
+  float linear_velocity_;       // The linear verlocity that the objects keeps.
+  float angular_velocity_max_;  // The maxmum angular_velocity of the objects.
 
   /**
    * @name          OnInitialize
@@ -37,6 +36,6 @@ class RandomMove : public ModelPlugin {
   float randomRange(const float range_lo, const float range_hi);
 };
 
-};  // end namespace arena_plugins
+};  // namespace flatland_plugins
 
 #endif

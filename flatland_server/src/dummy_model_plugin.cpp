@@ -76,7 +76,7 @@ void DummyModelPlugin::OnInitialize(const YAML::Node &config) {
         dummy_param_string_ + "\"");
   }
 }
-};
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::DummyModelPlugin,
                        flatland_server::ModelPlugin)

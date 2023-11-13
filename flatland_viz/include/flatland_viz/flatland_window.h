@@ -47,12 +47,13 @@
 // namespace rviz;
 
 #include <ros/ros.h>
+
 #include <QLabel>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QWidget>
-#include "flatland_viz/flatland_viz.h"
 
+#include "flatland_viz/flatland_viz.h"
 #include "rviz/display.h"
 #include "rviz/display_context.h"
 #include "rviz/displays_panel.h"

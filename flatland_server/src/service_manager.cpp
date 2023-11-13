@@ -46,6 +46,7 @@
 
 #include <flatland_server/service_manager.h>
 #include <flatland_server/types.h>
+
 #include <exception>
 
 namespace flatland_server {
@@ -61,7 +62,7 @@ ServiceManager::ServiceManager(SimulationManager *sim_man, World *world)
   delete_model_service_ =
       nh.advertiseService("delete_model", &ServiceManager::DeleteModel, this);
   delete_models_service_ =
-    nh.advertiseService("delete_models", &ServiceManager::DeleteModels, this);
+      nh.advertiseService("delete_models", &ServiceManager::DeleteModels, this);
   move_model_service_ =
       nh.advertiseService("move_model", &ServiceManager::MoveModel, this);
   pause_service_ = nh.advertiseService("pause", &ServiceManager::Pause, this);
@@ -69,11 +70,11 @@ ServiceManager::ServiceManager(SimulationManager *sim_man, World *world)
       nh.advertiseService("resume", &ServiceManager::Resume, this);
   toggle_pause_service_ =
       nh.advertiseService("toggle_pause", &ServiceManager::TogglePause, this);
-  
-  spawn_model_from_string_service =
-      nh.advertiseService("spawn_model_from_string", &ServiceManager::SpawnModelFromString, this);
-  spawn_models_from_string_service =
-      nh.advertiseService("spawn_models_from_string", &ServiceManager::SpawnModelsFromString, this);
+
+  spawn_model_from_string_service = nh.advertiseService(
+      "spawn_model_from_string", &ServiceManager::SpawnModelFromString, this);
+  spawn_models_from_string_service = nh.advertiseService(
+      "spawn_models_from_string", &ServiceManager::SpawnModelsFromString, this);
 
   if (spawn_model_service_) {
     ROS_INFO_NAMED("Service Manager", "Model spawning service ready to go");
@@ -119,14 +120,15 @@ bool ServiceManager::SpawnModel(flatland_msgs::SpawnModel::Request &request,
   return true;
 }
 
-bool ServiceManager::SpawnModels(flatland_msgs::SpawnModels::Request &request,
-                                flatland_msgs::SpawnModels::Response &response) {
+bool ServiceManager::SpawnModels(
+    flatland_msgs::SpawnModels::Request &request,
+    flatland_msgs::SpawnModels::Response &response) {
   ros::WallTime start = ros::WallTime::now();
-  ROS_DEBUG_NAMED("ServiceManager",
-                  "Request to spawn %ld models", request.models.size());
+  ROS_DEBUG_NAMED("ServiceManager", "Request to spawn %ld models",
+                  request.models.size());
   response.success = true;
   response.message = "";
-  for(int i_model=0; i_model < request.models.size(); i_model++){
+  for (int i_model = 0; i_model < request.models.size(); i_model++) {
     flatland_msgs::Model model = request.models[i_model];
     Pose pose(model.pose.x, model.pose.y, model.pose.theta);
 
@@ -139,7 +141,8 @@ bool ServiceManager::SpawnModels(flatland_msgs::SpawnModels::Request &request,
                       e.what());
     }
   }
-  ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
+  ROS_DEBUG("Spawning models in flatland: %f",
+            (ros::WallTime::now() - start).toSec());
   return true;
 }
 
@@ -150,9 +153,9 @@ bool ServiceManager::SpawnModelFromString(
   ros::WallTime start = ros::WallTime::now();
   ROS_DEBUG_NAMED("ServiceManager",
                   "Model spawn requested from file, namespace(\"%s\"), "
-                  "name(\'%s\"), pose(%f,%f,%f)", request.ns.c_str(),
-                  request.name.c_str(), request.pose.x, request.pose.y,
-                  request.pose.theta);
+                  "name(\'%s\"), pose(%f,%f,%f)",
+                  request.ns.c_str(), request.name.c_str(), request.pose.x,
+                  request.pose.y, request.pose.theta);
 
   Pose pose(request.pose.x, request.pose.y, request.pose.theta);
 
@@ -167,7 +170,8 @@ bool ServiceManager::SpawnModelFromString(
                     e.what());
   }
 
-  ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
+  ROS_DEBUG("Spawning models in flatland: %f",
+            (ros::WallTime::now() - start).toSec());
   return true;
 }
 
@@ -175,12 +179,12 @@ bool ServiceManager::SpawnModelsFromString(
     flatland_msgs::SpawnModels::Request &request,
     flatland_msgs::SpawnModels::Response &response) {
   ros::WallTime start = ros::WallTime::now();
-  ROS_DEBUG_NAMED("ServiceManager",
-                  "Request to spawn %ld models", request.models.size());
+  ROS_DEBUG_NAMED("ServiceManager", "Request to spawn %ld models",
+                  request.models.size());
 
   response.success = true;
   response.message = "";
-  for(int i_model=0; i_model < request.models.size(); i_model++){
+  for (int i_model = 0; i_model < request.models.size(); i_model++) {
     flatland_msgs::Model model = request.models[i_model];
     Pose pose(model.pose.x, model.pose.y, model.pose.theta);
 
@@ -194,7 +198,8 @@ bool ServiceManager::SpawnModelsFromString(
     }
   }
 
-  ROS_DEBUG("Spawning models in flatland: %f", (ros::WallTime::now() - start).toSec());
+  ROS_DEBUG("Spawning models in flatland: %f",
+            (ros::WallTime::now() - start).toSec());
   return true;
 }
 
@@ -219,13 +224,11 @@ bool ServiceManager::DeleteModel(
 bool ServiceManager::DeleteModels(
     flatland_msgs::DeleteModels::Request &request,
     flatland_msgs::DeleteModels::Response &response) {
-
   ros::WallTime start = ros::WallTime::now();
-  ROS_DEBUG_NAMED("ServiceManager", "Deleted %ld models",
-                  request.name.size());
+  ROS_DEBUG_NAMED("ServiceManager", "Deleted %ld models", request.name.size());
   response.success = true;
   response.message = "";
-  for(int i_model = 0; i_model < request.name.size(); i_model++){
+  for (int i_model = 0; i_model < request.name.size(); i_model++) {
     try {
       world_->DeleteModel(request.name[i_model]);
     } catch (const std::exception &e) {
@@ -272,4 +275,4 @@ bool ServiceManager::TogglePause(std_srvs::Empty::Request &request,
   world_->TogglePaused();
   return true;
 }
-};
+};  // namespace flatland_server

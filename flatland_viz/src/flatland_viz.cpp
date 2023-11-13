@@ -44,7 +44,11 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include "flatland_viz/flatland_viz.h"
+
 #include <OgreColourValue.h>
+#include <ros/ros.h>
+#include <stdlib.h>
 
 #include <QAction>
 #include <QApplication>
@@ -64,20 +68,13 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QToolButton>
-#include <QToolButton>
 #include <QUrl>
 
-#include <ros/ros.h>
-#include <stdlib.h>
-
+#include "flatland_viz/flatland_window.h"
 #include "rviz/display.h"
 #include "rviz/render_panel.h"
 #include "rviz/view_manager.h"
 #include "rviz/visualization_manager.h"
-
-#include "flatland_viz/flatland_window.h"
-
-#include "flatland_viz/flatland_viz.h"
 
 // Constructor.
 FlatlandViz::FlatlandViz(FlatlandWindow* parent) : QWidget((QWidget*)parent) {

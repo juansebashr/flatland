@@ -5,6 +5,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/NavSatFix.h>
 #include <tf/transform_broadcaster.h>
+
 #include <Eigen/Dense>
 
 #ifndef FLATLAND_PLUGINS_GPS_H
@@ -77,6 +78,6 @@ class Gps : public ModelPlugin {
    */
   void UpdateFix();
 };
-}
+}  // namespace flatland_plugins
 
 #endif  // FLATLAND_PLUGINS_GPS_H

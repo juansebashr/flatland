@@ -72,7 +72,8 @@ void PosePub::OnInitialize(const YAML::Node& config) {
       reader.Get<std::string>("odom_pub", "odometry/filtered");
   std::string ground_truth_topic =
       reader.Get<std::string>("ground_truth_pub", "odometry/ground_truth");
-  // std::string twist_pub_topic = reader.Get<std::string>("twist_pub", "twist");
+  // std::string twist_pub_topic = reader.Get<std::string>("twist_pub",
+  // "twist");
 
   // noise are in the form of linear x, linear y, angular variances
   // std::vector<double> odom_twist_noise =
@@ -97,7 +98,8 @@ void PosePub::OnInitialize(const YAML::Node& config) {
   // odom_twist_covar_default[7] = odom_twist_noise[1];
   // odom_twist_covar_default[35] = odom_twist_noise[2];
 
-  // auto odom_twist_covar = reader.GetArray<double, 36>("odom_twist_covariance",
+  // auto odom_twist_covar = reader.GetArray<double,
+  // 36>("odom_twist_covariance",
   //                                                     odom_twist_covar_default);
   auto odom_pose_covar = reader.GetArray<double, 36>("odom_pose_covariance",
                                                      odom_pose_covar_default);
@@ -118,12 +120,13 @@ void PosePub::OnInitialize(const YAML::Node& config) {
   }
 
   // if (enable_twist_pub_) {
-  //   twist_pub_ = nh_.advertise<geometry_msgs::TwistStamped>(twist_pub_topic, 1);
+  //   twist_pub_ = nh_.advertise<geometry_msgs::TwistStamped>(twist_pub_topic,
+  //   1);
   // }
 
   // init the values for the messages
   // ground_truth_msg_.header.frame_id = odom_frame_id;
-  ground_truth_msg_.header.frame_id = 
+  ground_truth_msg_.header.frame_id =
       tf::resolve("", GetModel()->NameSpaceTF(odom_frame_id));
   ground_truth_msg_.child_frame_id =
       tf::resolve("", GetModel()->NameSpaceTF(body_->name_));
@@ -157,8 +160,9 @@ void PosePub::OnInitialize(const YAML::Node& config) {
                   "odom_pose_noise({%f,%f,%f})"
                   "pub_rate(%f)\n",
                   body_, body_->name_.c_str(), odom_frame_id.c_str(),
-                  odom_topic.c_str(), ground_truth_topic.c_str(), odom_pose_noise[0],
-                  odom_pose_noise[1], odom_pose_noise[2], pub_rate);
+                  odom_topic.c_str(), ground_truth_topic.c_str(),
+                  odom_pose_noise[0], odom_pose_noise[1], odom_pose_noise[2],
+                  pub_rate);
 }
 
 void PosePub::AfterPhysicsStep(const Timekeeper& timekeeper) {
@@ -212,7 +216,6 @@ void PosePub::BeforePhysicsStep(const Timekeeper& timekeeper) {
   b2Vec2 position = b2body->GetPosition();
   float angle = b2body->GetAngle();
 }
-}
+}  // namespace flatland_plugins
 
-PLUGINLIB_EXPORT_CLASS(flatland_plugins::PosePub,
-                       flatland_server::ModelPlugin)
+PLUGINLIB_EXPORT_CLASS(flatland_plugins::PosePub, flatland_server::ModelPlugin)

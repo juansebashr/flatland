@@ -127,6 +127,6 @@ class Bumper : public ModelPlugin {
    */
   void PostSolve(b2Contact *contact, const b2ContactImpulse *impulse) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

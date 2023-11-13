@@ -45,6 +45,7 @@
  */
 
 #include <flatland_server/entity.h>
+
 #include <string>
 
 namespace flatland_server {

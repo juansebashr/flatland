@@ -48,6 +48,7 @@
 #define FLATLAND_VIZ_FLATLAND_VIZ_H
 
 #include <ros/ros.h>
+
 #include <QAction>
 #include <QActionGroup>
 #include <QList>
@@ -83,17 +84,17 @@ class Display;
 class RenderPanel;
 class VisualizationManager;
 class WidgetGeometryChangeDetector;
-}
+}  // namespace rviz
 
 class FlatlandWindow;
 
 class FlatlandViz : public QWidget {
   Q_OBJECT public :
       /**
-        * @brief Construct FlatlandViz and subscribe to debug topic list
-        *
-        * @param parent The parent widget
-        */
+       * @brief Construct FlatlandViz and subscribe to debug topic list
+       *
+       * @param parent The parent widget
+       */
       FlatlandViz(FlatlandWindow* parent = 0);
 
   /**

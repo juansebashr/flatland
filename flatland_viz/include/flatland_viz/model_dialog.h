@@ -48,16 +48,16 @@
 #ifndef MODEL_DIALOG_H
 #define MODEL_DIALOG_H
 
-#include <QDialog>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QWidget>
-
 #include <flatland_msgs/SpawnModel.h>
 #include <flatland_server/timekeeper.h>
 #include <flatland_server/world.h>
 #include <gtest/gtest.h>
 #include <ros/ros.h>
+
+#include <QDialog>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QWidget>
 #include <boost/filesystem.hpp>
 #include <iostream>
 #include <regex>

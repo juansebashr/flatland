@@ -45,6 +45,7 @@
  */
 
 #include <flatland_plugins/update_timer.h>
+
 #include <cstdint>
 
 namespace flatland_plugins {
@@ -88,4 +89,4 @@ bool UpdateTimer::CheckUpdate(const flatland_server::Timekeeper &timekeeper) {
 
   return false;
 }
-};
+};  // namespace flatland_plugins

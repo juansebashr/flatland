@@ -25,7 +25,7 @@ void RandomMove::BeforePhysicsStep(const Timekeeper& timekeeper) {
   auto angle = body_->physics_body_->GetAngle();
   float sign = 1.0f;
   // the body collide with other objects, then inverse the linear velocity
-  if (v_linear.Length() < 0.3*linear_velocity_) {
+  if (v_linear.Length() < 0.3 * linear_velocity_) {
     sign = -1;
     v_angular = randomRange(-angular_velocity_max_, angular_velocity_max_);
     float v_x = sign * linear_velocity_ * cos(angle);

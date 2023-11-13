@@ -73,6 +73,6 @@ class DummyModelPlugin : public ModelPlugin {
    */
   void OnInitialize(const YAML::Node &config) override;
 };
-};
+};  // namespace flatland_plugins
 
 #endif

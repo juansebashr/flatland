@@ -183,9 +183,8 @@ void InteractiveMarkerManager::processMouseUpFeedback(
       new_pose.y = feedback->pose.position.y;
       new_pose.theta = atan2(
           2.0 * feedback->pose.orientation.w * feedback->pose.orientation.z,
-          1.0 -
-              2.0 * feedback->pose.orientation.z *
-                  feedback->pose.orientation.z);
+          1.0 - 2.0 * feedback->pose.orientation.z *
+                    feedback->pose.orientation.z);
       (*models_)[i]->SetPose(new_pose);
       break;
     }
@@ -245,4 +244,4 @@ void InteractiveMarkerManager::update() {
 InteractiveMarkerManager::~InteractiveMarkerManager() {
   interactive_marker_server_.reset();
 }
-}
+}  // namespace flatland_server

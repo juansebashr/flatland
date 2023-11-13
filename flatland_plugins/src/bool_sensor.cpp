@@ -134,7 +134,7 @@ void BoolSensor::EndContact(b2Contact *contact) {
 
   collisions_--;
 }
-}  // End flatland_plugins namespace
+}  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::BoolSensor,
                        flatland_server::ModelPlugin)

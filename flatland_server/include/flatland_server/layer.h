@@ -53,6 +53,7 @@
 #include <flatland_server/entity.h>
 #include <flatland_server/types.h>
 #include <yaml-cpp/yaml.h>
+
 #include <opencv2/opencv.hpp>
 #include <string>
 
@@ -111,14 +112,14 @@ class Layer : public Entity {
         double scale, const YAML::Node &properties);
 
   /**
-  * @brief Constructor for the Layer class for initialization with no static
-  * map in it
-  * @param[in] physics_world Pointer to the box2d physics world
-  * @param[in] cfr Collision filter registry
-  * @param[in] names A list of names for the layer, the first name is used
-  * for the name of the body
-  * @param[in] properties A YAML node containing properties for plugins to use
-  */
+   * @brief Constructor for the Layer class for initialization with no static
+   * map in it
+   * @param[in] physics_world Pointer to the box2d physics world
+   * @param[in] cfr Collision filter registry
+   * @param[in] names A list of names for the layer, the first name is used
+   * for the name of the body
+   * @param[in] properties A YAML node containing properties for plugins to use
+   */
   Layer(b2World *physics_world, CollisionFilterRegistry *cfr,
         const std::vector<std::string> &names, const Color &color,
         const YAML::Node &properties);

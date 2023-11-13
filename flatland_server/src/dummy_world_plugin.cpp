@@ -71,7 +71,7 @@ void DummyWorldPlugin::OnInitialize(const YAML::Node &config) {
         type_);
   }
 }
-};
+};  // namespace flatland_plugins
 
 PLUGINLIB_EXPORT_CLASS(flatland_plugins::DummyWorldPlugin,
                        flatland_server::WorldPlugin)

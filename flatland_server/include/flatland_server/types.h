@@ -132,6 +132,6 @@ struct Color {
 
   bool operator!=(const Color &c) const { return !operator==(c); }
 };
-}
+}  // namespace flatland_server
 
 #endif

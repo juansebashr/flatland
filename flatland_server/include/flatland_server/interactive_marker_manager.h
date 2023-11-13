@@ -70,42 +70,42 @@ class InteractiveMarkerManager {
   /// MOUSE_UP event.
 
   /**
-  * @brief Process interactive feedback on a MOUSE_UP event and use it
-  * to move the appropriate model to the new pose
-  * @param[in] feedback The feedback structure containing the name of the
-  * manipulated model and the new pose
-  */
+   * @brief Process interactive feedback on a MOUSE_UP event and use it
+   * to move the appropriate model to the new pose
+   * @param[in] feedback The feedback structure containing the name of the
+   * manipulated model and the new pose
+   */
   void processMouseUpFeedback(
       const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback);
 
   /**
-  * @brief Process interactive feedback on a MOUSE_DOWN event and use it
-  * to set a flag indicating that the user is manipulating a model with
-  * its interactive marker
-  * @param[in] feedback The feedback structure containing the name of the
-  * manipulated model and the current pose. Not used in this callback
-  */
+   * @brief Process interactive feedback on a MOUSE_DOWN event and use it
+   * to set a flag indicating that the user is manipulating a model with
+   * its interactive marker
+   * @param[in] feedback The feedback structure containing the name of the
+   * manipulated model and the current pose. Not used in this callback
+   */
   void processMouseDownFeedback(
       const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback);
 
   /**
-  * @brief Process interactive feedback on a POSE_UPDATE event and record
-  * the current wall time to detect a timeout in the update method
-  * @param[in] feedback The feedback structure containing the name of the
-  * manipulated model and the current pose. Not used in this method
-  */
+   * @brief Process interactive feedback on a POSE_UPDATE event and record
+   * the current wall time to detect a timeout in the update method
+   * @param[in] feedback The feedback structure containing the name of the
+   * manipulated model and the current pose. Not used in this method
+   */
   void processPoseUpdateFeedback(
       const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback);
 
   /**
-  * @brief Process feedback from the context menu of the interactive marker to
-  * delete the appropriate model
-  * @param[in] feedback The feedback structure containing the name of the model
-  * to be deleted
-  */
+   * @brief Process feedback from the context menu of the interactive marker to
+   * delete the appropriate model
+   * @param[in] feedback The feedback structure containing the name of the model
+   * to be deleted
+   */
   void deleteModelMenuCallback(
       const visualization_msgs::InteractiveMarkerFeedbackConstPtr& feedback);
 };
-}
+}  // namespace flatland_server
 
 #endif  // INTERACTIVEMARKERMANAGER_H

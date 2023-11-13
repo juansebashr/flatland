@@ -52,10 +52,11 @@
 #include <flatland_server/yaml_reader.h>
 #include <ros/ros.h>
 #include <yaml-cpp/yaml.h>
+
 #include <boost/filesystem.hpp>
 #include <map>
-#include <string>
 #include <set>
+#include <string>
 
 namespace flatland_server {
 
@@ -166,7 +167,6 @@ World *World::MakeWorld(const std::string &yaml_path) {
 }
 
 void World::LoadLayers(YamlReader &layers_reader) {
-
   // Used to delete existing layers not found in the layers reader
   std::set<std::vector<std::string>> layer_ids_added;
 
@@ -198,18 +198,24 @@ void World::LoadLayers(YamlReader &layers_reader) {
         reader.SubnodeOpt("properties", YamlReader::NodeTypeCheck::MAP).Node();
     reader.EnsureAccessedAllKeys();
 
+    if (layers_name_map_.count(names) >
+        0) {  // this layer name already exists, delete it
+      ROS_INFO_NAMED(
+          "World", "Removing layer \"%s\" from path=\"%s\" prior to reloading",
+          names[0].c_str(), map_path.string().c_str());
 
-    if (layers_name_map_.count(names)>0) {  // this layer name already exists, delete it
-      ROS_INFO_NAMED("World", "Removing layer \"%s\" from path=\"%s\" prior to reloading",
-                    names[0].c_str(), map_path.string().c_str());
+      Layer *old_layer = layers_name_map_[names];
 
-      Layer* old_layer = layers_name_map_[names];
+      layers_.erase(std::remove(layers_.begin(), layers_.end(), old_layer),
+                    layers_.end());  // remove the layer from the layers_ vector
+      delete old_layer;  // delete the layer object, which should also delete
+                         // it's world entities
+      layers_name_map_.erase(
+          names);  // remove old entry from layers_names_map_. New layer will be
+                   // re-added.
 
-      layers_.erase(std::remove(layers_.begin(), layers_.end(), old_layer), layers_.end()); // remove the layer from the layers_ vector
-      delete old_layer;  // delete the layer object, which should also delete it's world entities
-      layers_name_map_.erase(names);  // remove old entry from layers_names_map_. New layer will be re-added.
-
-    } else {  // otherwise, we need to add the layer to the collision filter registry
+    } else {  // otherwise, we need to add the layer to the collision filter
+              // registry
 
       for (const auto &name : names) {
         if (cfr_.RegisterLayer(name) == cfr_.LAYER_ALREADY_EXIST) {
@@ -223,9 +229,9 @@ void World::LoadLayers(YamlReader &layers_reader) {
     }
 
     ROS_INFO_NAMED("World", "Loading layer \"%s\" from path=\"%s\"",
-                  names[0].c_str(), map_path.string().c_str());
+                   names[0].c_str(), map_path.string().c_str());
 
-    Layer* layer = Layer::MakeLayer(physics_world_, &cfr_, map_path.string(),
+    Layer *layer = Layer::MakeLayer(physics_world_, &cfr_, map_path.string(),
                                     names, color, properties);
     layers_name_map_.insert(
         std::pair<std::vector<std::string>, Layer *>(names, layer));
@@ -237,17 +243,21 @@ void World::LoadLayers(YamlReader &layers_reader) {
   }
 
   // remove any  existing layers that were not present in the new world file
-  for( const auto& keyVal : layers_name_map_) {
-    if (layer_ids_added.count(keyVal.first) == 0)  {  // layer id not found in the new file
+  for (const auto &keyVal : layers_name_map_) {
+    if (layer_ids_added.count(keyVal.first) ==
+        0) {  // layer id not found in the new file
       // delete physics body if present, clearing it
       if (keyVal.second->body_ != nullptr) {
-        ROS_INFO_NAMED("World", "Clearing physics body of obsolete layer \"%s\"", keyVal.second->name_.c_str());
+        ROS_INFO_NAMED("World",
+                       "Clearing physics body of obsolete layer \"%s\"",
+                       keyVal.second->name_.c_str());
         delete keyVal.second->body_;
         keyVal.second->body_ = nullptr;
       }
 
     } else {
-      ROS_INFO_NAMED("World", "Leaving active layer \"%s\"", keyVal.second->name_.c_str());
+      ROS_INFO_NAMED("World", "Leaving active layer \"%s\"",
+                     keyVal.second->name_.c_str());
     }
   }
 }
